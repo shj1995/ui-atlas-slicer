@@ -8,7 +8,7 @@
 [![GitHub](https://img.shields.io/badge/GitHub-shj1995%2Fui--atlas--slicer-181717?logo=github)](https://github.com/shj1995/ui-atlas-slicer)
 [![License](https://img.shields.io/github/license/shj1995/ui-atlas-slicer?color=0d9f89)](LICENSE)
 [![Runtime](https://img.shields.io/badge/runtime-browser%20only-0d9f89)](#隐私与安全)
-[![Deploy](https://img.shields.io/badge/deploy-cloudflare%20pages-f38020?logo=cloudflare)](#部署到-cloudflare-pages)
+[![Deploy](https://img.shields.io/badge/deploy-cloudflare%20workers-f38020?logo=cloudflare)](#部署到-cloudflare-workers)
 
 <br />
 
@@ -46,6 +46,8 @@ npm run dev
 
 打开 Vite 输出的本地地址，把 PNG 拖到画布即可开始。也可以直接打开 index.html，但使用 Vite 开发服务器的模块加载和热更新体验更稳定。
 
+> 需要部署到 Cloudflare 时，推荐使用 Node.js 20 或更高版本。项目已经内置 Workers Static Assets 配置，可直接使用下面的一键部署按钮。
+
 生产构建：
 
 ~~~bash
@@ -82,32 +84,36 @@ npm run preview
 | Delete | 删除选中切片 |
 | 鼠标滚轮 | 缩放 |
 
-## 部署到 Cloudflare Pages
+## 部署到 Cloudflare Workers
 
-### GitHub 自动部署（推荐）
+### 一键部署（推荐）
 
-1. 在 Cloudflare Dashboard 进入 Workers & Pages → Create application → Pages → Connect to Git。
-2. 选择 shj1995/ui-atlas-slicer 仓库。
-3. 构建配置填写：
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/shj1995/ui-atlas-slicer)
 
-   | 配置项 | 值 |
-   | --- | --- |
-   | Framework preset | Vite（或 None） |
-   | Build command | npm run build |
-   | Build output directory | dist |
-   | Node.js version | 20 或更高 |
+点击按钮后，Cloudflare 会引导你将仓库导入自己的 GitHub 账号，并创建 Workers 项目。仓库必须保持公开；首次部署时可以按需修改 Worker 名称和构建设置。
 
-4. 保存并部署。之后每次推送到默认分支都会自动重新构建。
+### GitHub 自动部署
+
+也可以在 Cloudflare Dashboard 进入 **Workers & Pages → Create application → Workers → Import a repository**，选择 `shj1995/ui-atlas-slicer`，然后使用以下设置：
+
+| 配置项 | 值 |
+| --- | --- |
+| Root directory | `/` |
+| Build command | `npm run build` |
+| Deploy command | `npm run deploy` |
+| Node.js version | 20 或更高 |
+
+连接仓库后，推送到 `main` 分支会自动构建并部署；也可以开启非生产分支预览。
 
 ### Wrangler 手动部署
 
 ~~~bash
 npm install
 npm run build
-npx wrangler pages deploy dist --project-name ui-atlas-slicer
+npm run deploy
 ~~~
 
-Cloudflare Pages 只托管 dist 静态文件；图像处理仍在访问者浏览器本地完成。
+`wrangler.jsonc` 将 `dist` 配置为 Workers Static Assets 目录。这个项目没有 Worker 后端代码，部署的只是静态资源；图像处理仍然完全在访问者浏览器本地完成。
 
 ## 隐私与安全
 
@@ -122,6 +128,7 @@ ui-atlas-slicer/
 ├── index.html                 # 应用界面
 ├── styles.css                 # 主题、布局和响应式样式
 ├── app.js                     # 交互、Canvas 渲染和导出流程
+├── wrangler.jsonc             # Cloudflare Workers Static Assets 配置
 ├── src/
 │   ├── imageProcessing.js     # 无框架图像处理算法
 │   └── imageProcessing.README.md
