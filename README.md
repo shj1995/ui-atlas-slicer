@@ -1,6 +1,6 @@
 <div align="center">
 
-# SpriteLab · UI 图集拆分器
+# UI Atlas Slicer · UI 图集拆分器
 
 一款纯前端 UI 图集拆分工具。
 在浏览器本地把一张 PNG 图集拆成可直接使用的独立 PNG，不上传素材，不依赖后端。
@@ -17,9 +17,9 @@
 
 </div>
 
-## 为什么做 SpriteLab
+## 为什么做 UI Atlas Slicer
 
-通用图集工具通常更偏向规则精灵或批量压缩，而游戏 UI 经常需要逐个确认边界：按钮、面板、图标尺寸不一致，自动识别还可能把一排素材合并在一起。SpriteLab 把精确的手动切片放在核心位置，同时提供自动识别、假透明清理和网格切片作为辅助流程。
+通用图集工具通常更偏向规则精灵或批量压缩，而游戏 UI 经常需要逐个确认边界：按钮、面板、图标尺寸不一致，自动识别还可能把一排素材合并在一起。UI Atlas Slicer 把精确的手动切片放在核心位置，同时提供自动识别、假透明清理和网格切片作为辅助流程。
 
 ## 功能一览
 
@@ -68,7 +68,7 @@ npm run preview
 
 - 名称支持 {n} 序号占位符；{nn}、{nnn} 可生成两位或三位补零序号。
 - “生成坐标清单”会额外下载一个 *.atlas.json 文件，便于后续工具链继续处理。
-- 该 JSON 是 SpriteLab 的自定义坐标清单，记录原图尺寸、切片坐标和裁剪状态。
+- 该 JSON 是 UI Atlas Slicer 的自定义坐标清单，记录原图尺寸、切片坐标和裁剪状态。
 - “导出 ZIP”会将 PNG 文件（以及启用命名时的坐标清单）打包为一个 ZIP，适合归档或交付。
 
 ## 快捷键
@@ -130,7 +130,7 @@ ui-atlas-slicer/
 ├── app.js                     # 交互、Canvas 渲染和导出流程
 ├── wrangler.jsonc             # Cloudflare Workers Static Assets 配置
 ├── public/
-│   └── spritelab-icon.png     # 应用图标与 favicon
+│   └── ui-atlas-slicer-icon.png # 应用图标与 favicon
 ├── src/
 │   ├── imageProcessing.js     # 无框架图像处理算法
 │   └── imageProcessing.README.md

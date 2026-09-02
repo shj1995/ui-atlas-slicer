@@ -14,7 +14,7 @@ import {
 } from "./src/imageProcessing.js";
 
 /*
- * SpriteLab is intentionally a small, dependency-free browser app.  The UI
+ * UI Atlas Slicer is intentionally a small, dependency-free browser app.  The UI
  * is DOM based while the image and overlay work happens in one canvas.  This
  * keeps the project easy to host from a local folder without a server.
  */
@@ -71,7 +71,7 @@ const state = {
 };
 state.sourceCtx = state.sourceCanvas.getContext("2d", { willReadFrequently: true });
 
-const THEME_STORAGE_KEY = "spritelab-theme";
+const THEME_STORAGE_KEY = "ui-atlas-slicer-theme";
 
 function storedTheme() {
   try {
@@ -684,7 +684,7 @@ async function exportSlices(selectedOnly = false) {
 
 function buildMetadataBlob(slices, data, options = {}) {
   const payload = {
-    format: "SpriteLab-Atlas",
+    format: "UI-Atlas-Slicer",
     version: 1,
     image: state.fileName,
     size: { width: data.width, height: data.height },
