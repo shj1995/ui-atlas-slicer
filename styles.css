@@ -127,8 +127,6 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .icon-btn:hover, .mini-icon-btn:hover { color:var(--text); background:var(--bg-raised); border-color:var(--border); }
 .icon-btn svg, .mini-icon-btn svg, .tool-btn svg, .quick-action svg, .primary-btn svg, .secondary-btn svg, .danger-btn svg, .panel-note svg, .clean-actions svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
 .icon-btn.small { width:28px; height:28px; }
-.avatar-btn { width:30px; height:30px; border:1px solid rgba(96,223,198,.34); background:linear-gradient(145deg,#253d47,#17252b); color:var(--accent); border-radius:50%; font-weight:800; cursor:pointer; }
-
 .workspace { min-height:0; display:grid; grid-template-columns:276px minmax(430px,1fr) 320px; }
 .sidebar { min-height:0; background:rgba(17,22,30,.94); overflow:hidden; }
 .left-sidebar { border-right:1px solid var(--border-soft); display:flex; flex-direction:column; }
@@ -268,14 +266,6 @@ button, input, select { font-size: 1rem; }
 .primary-btn svg, .secondary-btn svg, .danger-btn svg, .panel-note svg,
 .clean-actions svg { width: 19px; height: 19px; }
 .icon-btn.small { width: 34px; height: 34px; }
-.avatar-btn {
-  width: 36px;
-  height: 36px;
-  border-color: var(--accent);
-  background: var(--accent-dim);
-  color: var(--accent-2);
-  font-size: 14px;
-}
 .theme-toggle {
   display: inline-flex;
   align-items: center;
