@@ -1,0 +1,26 @@
+{
+  "name": "ui-atlas-slicer",
+  "private": true,
+  "version": "0.1.0",
+  "description": "纯前端、浏览器本地运行的 Cocos Creator UI 图集拆分器",
+  "license": "MIT",
+  "author": "shj1995",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shj1995/ui-atlas-slicer.git"
+  },
+  "homepage": "https://github.com/shj1995/ui-atlas-slicer",
+  "bugs": {
+    "url": "https://github.com/shj1995/ui-atlas-slicer/issues"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "fflate": "^0.8.3",
+    "vite": "8.2.2"
+  }
+}

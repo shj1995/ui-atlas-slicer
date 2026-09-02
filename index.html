@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f7fb" />
+    <title>SpriteLab · UI 图集拆分器</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="brand-copy">
+            <div class="brand-name">SpriteLab</div>
+            <div class="brand-subtitle">UI 图集拆分器</div>
+          </div>
+        </div>
+        <div class="topbar-divider"></div>
+        <div class="project-title-wrap">
+          <div class="project-name" id="projectName">UI 通用精灵图</div>
+          <span class="local-badge"><i></i>仅在本地处理</span>
+        </div>
+        <div class="topbar-actions">
+          <div class="history-actions" aria-label="编辑历史">
+            <button class="icon-btn" id="undoBtn" title="撤销（Ctrl / ⌘ Z）" aria-label="撤销" disabled>
+              <svg viewBox="0 0 24 24"><path d="M9 7 4 12l5 5"/><path d="M4 12h9a7 7 0 0 1 7 7v1"/></svg>
+            </button>
+            <button class="icon-btn" id="redoBtn" title="重做（Ctrl / ⌘ Y）" aria-label="重做" disabled>
+              <svg viewBox="0 0 24 24"><path d="m15 7 5 5-5 5"/><path d="M20 12h-9a7 7 0 0 0-7 7v1"/></svg>
+            </button>
+          </div>
+          <button class="icon-btn" id="helpBtn" title="快捷键帮助" aria-label="快捷键帮助">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.7 9a2.4 2.4 0 1 1 4.2 1.6c-.9.9-1.9 1.3-1.9 2.8"/><path d="M12 16.8h.01"/></svg>
+          </button>
+          <button class="icon-btn" id="settingsBtn" title="设置" aria-label="设置">
+            <svg viewBox="0 0 24 24"><path d="M12 8.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Z"/><path d="m19.4 15 .1.1a1.6 1.6 0 0 1-2.3 2.3l-.1-.1a1.7 1.7 0 0 0-2.9 1.2v.2a1.6 1.6 0 0 1-3.2 0v-.2a1.7 1.7 0 0 0-2.9-1.2l-.1.1a1.6 1.6 0 1 1-2.3-2.3l.1-.1a1.7 1.7 0 0 0-1.2-2.9h-.2a1.6 1.6 0 0 1 0-3.2h.2a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a1.6 1.6 0 1 1 2.3-2.3l.1.1a1.7 1.7 0 0 0 2.9-1.2V2.3a1.6 1.6 0 0 1 3.2 0v.2a1.7 1.7 0 0 0 2.9 1.2l.1-.1a1.6 1.6 0 1 1 2.3 2.3l-.1.1a1.7 1.7 0 0 0 1.2 2.9h.2a1.6 1.6 0 0 1 0 3.2h-.2a1.7 1.7 0 0 0-1.2 2.9Z"/></svg>
+          </button>
+          <button class="theme-toggle" id="themeToggleBtn" type="button" title="切换主题" aria-label="切换主题">
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/></svg>
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 15.7A8.5 8.5 0 0 1 8.3 3.6 8.6 8.6 0 1 0 20.4 15.7Z"/></svg>
+            <span id="themeToggleLabel">深色</span>
+          </button>
+          <a class="github-link" id="githubLink" href="https://github.com/shj1995/ui-atlas-slicer" target="_blank" rel="noopener noreferrer" title="在 GitHub 查看开源项目" aria-label="在 GitHub 查看开源项目">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.69-3.88-1.54-3.88-1.54-.53-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.52-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.19 1.18.93-.26 1.93-.39 2.93-.39s2 .13 2.93.39c2.22-1.5 3.19-1.18 3.19-1.18.62 1.59.23 2.77.11 3.06.73.81 1.18 1.84 1.18 3.1 0 4.43-2.71 5.41-5.29 5.69.41.35.78 1.04.78 2.1 0 1.52-.01 2.75-.01 3.12 0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            <span>GitHub</span>
+          </a>
+          <button class="avatar-btn" title="账户">K</button>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <aside class="sidebar left-sidebar">
+          <div class="sidebar-scroll">
+            <div class="section-heading compact-heading">
+              <span>素材</span>
+              <button class="mini-icon-btn" id="replaceImageBtn" title="替换图片"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+            <div class="asset-card" id="assetDropZone">
+              <div class="asset-preview checkerboard" id="assetPreview"><canvas id="assetThumb" width="224" height="126"></canvas></div>
+              <div class="asset-meta">
+                <div class="asset-name" id="assetName">灵墟问道-ui通用精灵图</div>
+                <div class="asset-details"><span id="assetSize">1024 × 640 px</span><span class="dot-sep">·</span><span id="assetFormat">PNG</span></div>
+              </div>
+              <div class="asset-status"><span class="status-dot"></span><span id="assetStatus">已载入示例</span></div>
+            </div>
+            <input id="fileInput" type="file" accept="image/png,image/webp,image/jpeg" hidden />
+            <button class="drop-hint" id="dropHint"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M5 14.5v3A2.5 2.5 0 0 0 7.5 20h9a2.5 2.5 0 0 0 2.5-2.5v-3"/></svg><span>拖入 PNG 或点击替换</span></button>
+
+            <div class="sidebar-rule"></div>
+            <div class="section-heading"><span>切片工具</span><span class="muted-count" id="sliceCount">12 个</span></div>
+            <div class="tool-grid">
+              <button class="tool-btn active" data-mode="select"><svg viewBox="0 0 24 24"><path d="m6 3 12.5 9.3-6.1 1.1 3.5 6.1-2.2 1.2-3.4-6.2-3.8 4.5Z"/></svg><span>选择</span><kbd>V</kbd></button>
+              <button class="tool-btn" data-mode="draw"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="1.5"/><path d="M8 3v4M16 3v4M8 17v4M16 17v4"/></svg><span>矩形切片</span><kbd>R</kbd></button>
+              <button class="tool-btn" data-mode="pan"><svg viewBox="0 0 24 24"><path d="M8 11V6a1.5 1.5 0 0 1 3 0v4-6a1.5 1.5 0 0 1 3 0v6-4a1.5 1.5 0 0 1 3 0v6-2a1.5 1.5 0 0 1 3 0v5.2A5.8 5.8 0 0 1 14.2 21h-1.1a5.8 5.8 0 0 1-4.8-2.5L5.4 14a1.7 1.7 0 0 1 2.6-2.1Z"/></svg><span>平移画布</span><kbd>H</kbd></button>
+            </div>
+            <div class="quick-actions">
+              <button id="autoDetectBtn" class="quick-action"><span class="action-icon auto-icon"><svg viewBox="0 0 24 24"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><circle cx="12" cy="12" r="3"/></svg></span><span><b>自动识别</b><small>按 Alpha 检测素材</small></span></button>
+              <button id="gridSliceBtn" class="quick-action"><span class="action-icon grid-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></svg></span><span><b>网格切片</b><small>规则帧快速生成</small></span></button>
+              <button id="cleanBgBtn" class="quick-action"><span class="action-icon clean-icon"><svg viewBox="0 0 24 24"><path d="M5 15.5 14.5 6l3.5 3.5-9.5 9.5H5Z"/><path d="m13 7.5 2-2 3.5 3.5-2 2M4 20h16"/></svg></span><span><b>清理假透明</b><small>移除棋盘格背景</small></span></button>
+            </div>
+
+            <div class="sidebar-rule"></div>
+            <div class="section-heading"><span>切片列表</span><button class="text-btn" id="clearSlicesBtn">清空</button></div>
+            <div class="slice-list" id="sliceList"></div>
+          </div>
+          <div class="sidebar-footer"><div class="tip-mark">⌘</div><span>拖拽调整 · Shift 多选 · Delete 删除</span></div>
+        </aside>
+
+        <main class="canvas-area">
+          <div class="canvas-toolbar">
+            <div class="canvas-breadcrumb"><span>画布</span><span class="slash">/</span><span class="active-breadcrumb" id="canvasFileName">灵墟问道-ui通用精灵图</span></div>
+            <div class="canvas-toolbar-actions">
+              <div class="segmented" role="group" aria-label="预览模式">
+                <button class="seg-btn active" data-preview="image" title="原图">原图</button>
+                <button class="seg-btn" data-preview="cleaned" title="清理后">清理后</button>
+                <button class="seg-btn" data-preview="mask" title="Alpha 蒙版">蒙版</button>
+              </div>
+              <button class="icon-btn small" id="fitBtn" title="适应窗口"><svg viewBox="0 0 24 24"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h3a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/></svg></button>
+              <div class="zoom-control"><button id="zoomOut" aria-label="缩小">−</button><span id="zoomLabel">66%</span><button id="zoomIn" aria-label="放大">＋</button></div>
+            </div>
+          </div>
+          <div class="canvas-stage" id="canvasStage">
+            <canvas id="viewportCanvas"></canvas>
+            <div class="stage-empty" id="stageEmpty" hidden><div class="empty-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m5 17 4.5-4.5 3 3 2.5-2.5 4 4"/></svg></div><b>把 PNG 拖到这里</b><span>或点击左侧“替换图片”</span></div>
+            <div class="selection-tooltip" id="selectionTooltip" hidden></div>
+          </div>
+          <div class="canvas-statusbar">
+            <div class="status-group"><span class="crosshair"></span><span id="cursorPosition">X 0 · Y 0</span></div>
+            <div class="status-group center-status"><span id="selectionStatus">未选择切片</span><span class="bar-dot"></span><span id="snapStatus">像素吸附</span></div>
+            <div class="status-group"><span id="canvasDimensions">1024 × 640</span><span class="bar-dot"></span><span>滚轮缩放 · 空格平移</span></div>
+          </div>
+        </main>
+
+        <aside class="sidebar right-sidebar">
+          <div class="inspector-tabs" role="tablist">
+            <button class="inspector-tab active" data-panel="inspector">属性</button>
+            <button class="inspector-tab" data-panel="detect">自动识别</button>
+            <button class="inspector-tab" data-panel="clean">背景清理</button>
+            <button class="inspector-tab" data-panel="grid">网格切片</button>
+          </div>
+          <div class="inspector-scroll">
+            <section class="inspector-panel active" id="panel-inspector">
+              <div class="panel-title-row"><div><h2>切片属性</h2><p id="inspectorSubtitle">选择一个切片开始编辑</p></div><span class="selected-chip" id="selectedChip">—</span></div>
+              <div id="noSelection" class="no-selection"><div class="no-selection-icon"><svg viewBox="0 0 24 24"><path d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/><path d="M8 9h8M8 13h5"/></svg></div><b>还没有选择切片</b><span>在画布中点击一个矩形<br/>或使用“矩形切片”工具新建</span></div>
+              <div id="selectionInspector" hidden>
+                <div class="form-field name-field"><label>名称</label><div class="input-with-icon"><input id="sliceNameInput" type="text" value="sprite_01"/><svg viewBox="0 0 24 24"><path d="M4 17.5V20h2.5L18.7 7.8l-2.5-2.5L4 17.5Z"/><path d="m14.8 6.2 2.5 2.5"/></svg></div></div>
+                <div class="field-grid four"><div class="form-field"><label>X</label><div class="unit-input"><input id="sliceXInput" type="number"/><span>px</span></div></div><div class="form-field"><label>Y</label><div class="unit-input"><input id="sliceYInput" type="number"/><span>px</span></div></div><div class="form-field"><label>宽度</label><div class="unit-input"><input id="sliceWInput" type="number" min="1"/><span>px</span></div></div><div class="form-field"><label>高度</label><div class="unit-input"><input id="sliceHInput" type="number" min="1"/><span>px</span></div></div></div>
+                <div class="inspector-divider"></div>
+                <div class="toggle-row"><div><b>保留透明边距</b><small>导出时不裁剪透明像素</small></div><label class="switch"><input id="keepPaddingToggle" type="checkbox"/><span></span></label></div>
+                <div class="toggle-row"><div><b>像素吸附</b><small>移动时对齐到整数像素</small></div><label class="switch"><input id="pixelSnapToggle" type="checkbox" checked/><span></span></label></div>
+                <div class="form-field grid-size-field"><label>网格吸附</label><div class="select-wrap"><select id="gridSnapSelect"><option value="0">关闭</option><option value="4">4 px</option><option value="8">8 px</option><option value="16">16 px</option><option value="32">32 px</option></select><svg viewBox="0 0 24 24"><path d="m7 9 5 5 5-5"/></svg></div></div>
+                <div class="selection-actions"><button class="secondary-btn" id="duplicateBtn"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>复制切片</button><button class="danger-btn" id="deleteBtn"><svg viewBox="0 0 24 24"><path d="M5 7h14M10 11v6M14 11v6M8 7l1-2h6l1 2m-9 0 1 13h8l1-13"/></svg>删除</button></div>
+              </div>
+              <div class="panel-note"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10v6M12 7.5h.01"/></svg><span>导出时将按名称自动编号。可用 <code>{n}</code>，或 <code>{nnn}</code> 生成补零序号。</span></div>
+            </section>
+
+            <section class="inspector-panel" id="panel-detect">
+              <div class="panel-title-row"><div><h2>自动识别</h2><p>根据 Alpha 通道寻找独立素材</p></div><span class="panel-badge">Beta</span></div>
+              <div class="param-card">
+                <div class="form-field"><label>Alpha 阈值 <output id="alphaThresholdOut">16</output></label><input class="range-input" id="alphaThreshold" type="range" min="0" max="255" value="16"/></div>
+                <div class="field-grid two"><div class="form-field"><label>最小面积</label><div class="unit-input"><input id="minAreaInput" type="number" value="24" min="1"/><span>px²</span></div></div><div class="form-field"><label>合并距离</label><div class="unit-input"><input id="mergeDistanceInput" type="number" value="6" min="0"/><span>px</span></div></div></div>
+                <div class="field-grid two"><div class="form-field"><label>最小宽度</label><div class="unit-input"><input id="minWidthInput" type="number" value="4" min="1"/><span>px</span></div></div><div class="form-field"><label>最小高度</label><div class="unit-input"><input id="minHeightInput" type="number" value="4" min="1"/><span>px</span></div></div></div>
+                <div class="toggle-row"><div><b>合并相邻碎片</b><small>桥接小间隙，避免图标被拆散</small></div><label class="switch"><input id="mergeFragmentsToggle" type="checkbox" checked/><span></span></label></div>
+                <div class="toggle-row"><div><b>保留阴影与光效</b><small>把半透明像素纳入检测</small></div><label class="switch"><input id="keepEffectsToggle" type="checkbox" checked/><span></span></label></div>
+                <div class="toggle-row"><div><b>自动裁剪透明边缘</b><small>开启贴合像素，关闭保留安全边距</small></div><label class="switch"><input id="autoCropToggle" type="checkbox"/><span></span></label></div>
+                <button class="primary-btn wide" id="runDetectBtn"><svg viewBox="0 0 24 24"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><circle cx="12" cy="12" r="3"/></svg>扫描透明区域</button>
+              </div>
+              <div class="result-header"><span>检测结果</span><div class="result-tools"><span id="detectCount">尚未扫描</span><button class="mini-text-btn" id="mergeCandidatesBtn" hidden>合并所选</button></div></div>
+              <div class="detect-result-empty" id="detectEmpty"><svg viewBox="0 0 24 24"><path d="M5 5h14v14H5z"/><path d="M8 12h8M12 8v8"/></svg><span>扫描后结果会显示在这里</span></div>
+              <div class="detect-result-list" id="detectResultList" hidden></div>
+              <button class="secondary-btn wide" id="acceptDetectBtn" hidden>接受结果并转为切片</button>
+            </section>
+
+            <section class="inspector-panel" id="panel-clean">
+              <div class="panel-title-row"><div><h2>背景清理</h2><p>移除写入像素的棋盘格背景</p></div><span class="panel-badge violet">RGBA</span></div>
+              <div class="clean-preview checkerboard" id="cleanPreview"><canvas id="cleanThumb" width="240" height="136"></canvas><span class="preview-label">实时预览</span></div>
+              <div class="param-card">
+                <div class="color-row"><div><label>取样颜色</label><small id="sampleColorText">自动取样四角</small></div><div class="color-picker-wrap"><input id="bgColorInput" type="color" value="#d8dbe4"/><span id="bgColorSwatch"></span></div></div>
+                <button class="secondary-btn wide" id="sampleCornersBtn"><svg viewBox="0 0 24 24"><path d="M5 9V5h4M15 5h4v4M19 15v4h-4M9 19H5v-4"/><circle cx="12" cy="12" r="2.5"/></svg>自动取样图片四角</button>
+                <div class="form-field"><label>颜色相似度 <output id="colorToleranceOut">18</output></label><input class="range-input" id="colorTolerance" type="range" min="0" max="100" value="18"/></div>
+                <div class="toggle-row"><div><b>从边缘 Flood Fill</b><small>只清理与边缘相连的区域</small></div><label class="switch"><input id="floodFillToggle" type="checkbox" checked/><span></span></label></div>
+                <div class="toggle-row"><div><b>保护主体边缘</b><small>保留近似半透明像素</small></div><label class="switch"><input id="protectEdgesToggle" type="checkbox" checked/><span></span></label></div>
+                <button class="primary-btn wide" id="runCleanBtn"><svg viewBox="0 0 24 24"><path d="M5 15.5 14.5 6l3.5 3.5-9.5 9.5H5Z"/><path d="M4 20h16"/></svg>清理背景</button>
+              </div>
+              <div class="clean-actions"><button class="secondary-btn" id="applyCleanBtn" disabled>应用清理</button><button class="ghost-btn" id="resetCleanBtn">还原</button></div>
+            </section>
+
+            <section class="inspector-panel" id="panel-grid">
+              <div class="panel-title-row"><div><h2>网格切片</h2><p>适合规则动画帧与图标排版</p></div><span class="panel-badge orange">GRID</span></div>
+              <div class="param-card">
+                <div class="field-grid two"><div class="form-field"><label>列数</label><div class="unit-input"><input id="gridCols" type="number" min="1" value="7"/><span>列</span></div></div><div class="form-field"><label>行数</label><div class="unit-input"><input id="gridRows" type="number" min="1" value="1"/><span>行</span></div></div></div>
+                <div class="field-grid two"><div class="form-field"><label>单格宽度</label><div class="unit-input"><input id="gridCellW" type="number" min="1" placeholder="自动"/><span>px</span></div></div><div class="form-field"><label>单格高度</label><div class="unit-input"><input id="gridCellH" type="number" min="1" placeholder="自动"/><span>px</span></div></div></div>
+                <div class="field-grid two"><div class="form-field"><label>横向间距</label><div class="unit-input"><input id="gridGapX" type="number" min="0" value="0"/><span>px</span></div></div><div class="form-field"><label>纵向间距</label><div class="unit-input"><input id="gridGapY" type="number" min="0" value="0"/><span>px</span></div></div></div>
+                <div class="field-grid two"><div class="form-field"><label>外边距</label><div class="unit-input"><input id="gridMargin" type="number" min="0" value="0"/><span>px</span></div></div><div class="form-field"><label>排序方式</label><div class="select-wrap"><select id="gridOrder"><option value="ltr">左上 → 右下</option><option value="bl">左下 → 右上</option><option value="rtl">右上 → 左下</option></select><svg viewBox="0 0 24 24"><path d="m7 9 5 5 5-5"/></svg></div></div></div>
+                <div class="toggle-row"><div><b>跳过空白格</b><small>忽略 Alpha 全为 0 的格子</small></div><label class="switch"><input id="skipEmptyToggle" type="checkbox" checked/><span></span></label></div>
+                <div class="toggle-row"><div><b>裁剪每格透明边缘</b><small>导出更紧凑的 PNG</small></div><label class="switch"><input id="gridCropToggle" type="checkbox"/><span></span></label></div>
+                <button class="primary-btn wide" id="runGridBtn"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></svg>生成网格切片</button>
+              </div>
+              <div class="grid-tip"><span class="tip-icon">i</span><span>当前图片 <b id="gridImageSize">1024 × 640</b>。留空单格尺寸将根据行列自动计算。</span></div>
+            </section>
+          </div>
+        </aside>
+      </div>
+
+      <footer class="export-bar">
+        <div class="export-summary"><span class="export-check"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span><div><b id="exportCount">12 个切片</b><small>准备就绪 · PNG / RGBA</small></div></div>
+        <div class="export-options"><label class="check-label"><input id="exportTrimToggle" type="checkbox"/><span class="fake-check"></span>导出时裁剪透明边缘</label><label class="check-label"><input id="exportMetaToggle" type="checkbox" checked/><span class="fake-check"></span>生成 Cocos 命名</label></div>
+        <div class="export-actions"><button class="secondary-btn export-zip-btn" id="exportZipBtn"><svg viewBox="0 0 24 24"><path d="M4 7.5h16v12H4z"/><path d="M4 7.5 7 4h4l1.5 2h4l3 1.5M9 11h6M9 14h6M9 17h3"/></svg>导出 ZIP</button><button class="secondary-btn" id="exportSelectedBtn" disabled>导出选中</button><button class="primary-btn export-btn" id="exportAllBtn"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 19h14"/></svg>导出全部 PNG <span class="btn-caret">⌄</span></button></div>
+      </footer>
+    </div>
+
+    <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+    <div class="modal-backdrop" id="helpModal" hidden><div class="modal-card"><div class="modal-head"><h3>快捷键</h3><button class="icon-btn small" data-close-modal="helpModal">×</button></div><div class="shortcut-grid"><span>选择工具</span><kbd>V</kbd><span>矩形切片</span><kbd>R</kbd><span>平移画布</span><kbd>H / Space</kbd><span>撤销 / 重做</span><kbd>Ctrl Z / Ctrl Y</kbd><span>复制切片</span><kbd>Ctrl D</kbd><span>删除切片</span><kbd>Delete</kbd></div></div></div>
+    <div class="modal-backdrop" id="settingsModal" hidden><div class="modal-card"><div class="modal-head"><h3>工作区设置</h3><button class="icon-btn small" data-close-modal="settingsModal">×</button></div><div class="setting-line"><span>主题</span><div class="select-wrap setting-select"><select id="themeSelect" aria-label="界面主题"><option value="light">白色主题</option><option value="dark">深色主题</option></select><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></div></div><div class="setting-line"><span>显示标尺辅助线</span><label class="switch"><input id="rulerToggle" type="checkbox" checked/><span></span></label></div><div class="setting-line"><span>高对比切片边框</span><label class="switch"><input id="contrastToggle" type="checkbox"/><span></span></label></div></div></div>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
