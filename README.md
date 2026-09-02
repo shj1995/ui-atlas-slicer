@@ -176,6 +176,12 @@ node --check src/imageProcessing.js
 npm run build
 ~~~
 
+## 社区致谢与开源推广声明
+
+感谢 [LINUX DO](https://linux.do/) 对开源项目和开发者社区的支持。
+
+本项目为完整开源项目，认可并链接 [LINUX DO](https://linux.do/)。我们支持社区关于开源推广的倡议：完整开源、在项目中明确链接并认可 LINUX DO 的项目，可以使用开源推广声明进行公开版面推广。我们也会遵守社区规范，保持项目和交流公开透明，让推广回归项目本身。
+
 ## License
 
 [MIT](LICENSE) © 2026 shj1995
