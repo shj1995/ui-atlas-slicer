@@ -55,6 +55,38 @@ npm run build
 npm run preview
 ~~~
 
+## 使用说明
+
+### 1. 导入图集
+
+启动后不会自动加载任何素材。点击左侧“替换图片”，或把 PNG 拖入素材卡片/画布，也可以直接粘贴剪贴板中的图片。导入后会显示文件尺寸、格式和透明棋盘格预览。
+
+![空画布状态](docs/images/usage/01-empty-state.png)
+
+### 2. 检查原图
+
+导入图片后，使用画布右上角的缩放、适应窗口和预览模式查看原图。底部会同步显示当前切片数量以及导出选项。
+
+![导入图集后的界面](docs/images/usage/02-image-imported.png)
+
+### 3. 手动画框
+
+选择“矩形切片”工具，在画布上拖出矩形。选中切片后可以移动、调整边缘、修改名称和坐标；按住 `Shift` 可以多选，`Delete` 删除，`Ctrl/⌘ Z` 撤销。
+
+![手动切片界面](docs/images/usage/03-slice-ready.png)
+
+### 4. 自动识别（可选）
+
+素材较多时可以使用“自动识别”。调整 Alpha 阈值、最小面积、最小宽高和合并距离后扫描，候选框会以虚线显示。确认结果前，可以逐个删除、合并或重新调整候选框。
+
+![自动识别结果](docs/images/usage/04-detection-results.png)
+
+### 5. 导出文件
+
+确认切片后，可导出全部 PNG、导出选中切片，或使用“导出 ZIP”一次打包。启用“生成坐标清单”时，ZIP 中会额外包含 `.atlas.json` 文件。
+
+![导出的 PNG 文件](docs/images/usage/05-exported-files.png)
+
 ## 推荐工作流
 
 1. 导入图集，先用缩放和棋盘格确认真透明情况。
@@ -131,6 +163,8 @@ ui-atlas-slicer/
 ├── wrangler.jsonc             # Cloudflare Workers Static Assets 配置
 ├── public/
 │   └── ui-atlas-slicer-icon.png # 应用图标与 favicon
+├── docs/
+│   └── images/usage/            # README 使用说明截图
 ├── src/
 │   ├── imageProcessing.js     # 无框架图像处理算法
 │   └── imageProcessing.README.md
@@ -149,13 +183,6 @@ node --check app.js
 node --check src/imageProcessing.js
 npm run build
 ~~~
-
-## 路线图
-
-- [ ] Web Worker 处理超大图集，降低主线程占用
-- [ ] 可保存/导入切片工程文件
-- [ ] 更多通用元数据格式适配
-- [ ] 批量处理多个图集
 
 ## License
 
