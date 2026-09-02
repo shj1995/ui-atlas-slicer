@@ -55,7 +55,7 @@ const result = await exportSlicesAsPng(imageData, grid.rects, {
 
 // 将 PNG 和可选的 JSON 清单打包为一个本地 ZIP
 const zip = await createZipBlob(result.files, {
-  extraFiles: [{ name: "sprites.cocos.json", blob: new Blob(["{}"], { type: "application/json" }) }],
+  extraFiles: [{ name: "sprites.atlas.json", blob: new Blob(["{}"], { type: "application/json" }) }],
 });
 downloadZipBlob(zip, "sprites.zip");
 ```

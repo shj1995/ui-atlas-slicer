@@ -16,8 +16,7 @@ import {
 /*
  * SpriteLab is intentionally a small, dependency-free browser app.  The UI
  * is DOM based while the image and overlay work happens in one canvas.  This
- * keeps the project easy to drop into a Cocos Creator toolchain or host from
- * a local folder without a server.
+ * keeps the project easy to host from a local folder without a server.
  */
 
 const $ = (selector) => document.querySelector(selector);
@@ -46,9 +45,9 @@ const state = {
   maskPreviewData: null,
   backgroundColors: [],
   backgroundColorManual: false,
-  fileName: "灵墟问道-ui通用精灵图-按钮面板图集-真透明-v2.png",
+  fileName: "atlas.png",
   fileFormat: "PNG",
-  imageName: "灵墟问道-ui通用精灵图",
+  imageName: "未选择图片",
   slices: [],
   selectedIds: new Set(),
   mode: "select",
@@ -66,7 +65,6 @@ const state = {
   history: [],
   redo: [],
   spaceDown: false,
-  hasDemo: true,
   rulerVisible: true,
   highContrast: false,
   theme: "light",
@@ -210,7 +208,7 @@ function syncImageCanvas() {
   state.maskSourceRef = null;
 }
 
-function setImageData(imageData, name, fileName, fromDemo = false) {
+function setImageData(imageData, name, fileName) {
   clearTimeout(cleanPreviewTimer);
   state.originalImageData = cloneData(imageData);
   state.cleanedImageData = null;
@@ -221,9 +219,8 @@ function setImageData(imageData, name, fileName, fromDemo = false) {
   const extension = (state.fileName.match(/\.([^.]+)$/)?.[1] || "png").toUpperCase();
   state.fileFormat = extension === "JPG" ? "JPEG" : extension;
   state.imageName = name || state.fileName.replace(/\.[^.]+$/, "");
-  state.hasDemo = fromDemo;
-  state.slices = fromDemo ? makeDemoSlices() : [];
-  state.selectedIds = new Set(fromDemo && state.slices[0] ? [state.slices[0].id] : []);
+  state.slices = [];
+  state.selectedIds = new Set();
   state.candidates = [];
   state.candidateSelectedIds.clear();
   state.detectStatus = "idle";
@@ -238,68 +235,6 @@ function setImageData(imageData, name, fileName, fromDemo = false) {
   renderCleanThumb();
   fitToWindow();
   renderAll();
-}
-
-function makeDemoImage() {
-  const canvas = document.createElement("canvas");
-  canvas.width = 1024;
-  canvas.height = 640;
-  const ctx = canvas.getContext("2d");
-  const round = (x, y, w, h, r) => {
-    ctx.beginPath();
-    ctx.roundRect(x, y, w, h, r);
-  };
-  const panel = (x, y, w, h, fill = "#1a2c35", stroke = "#37626a") => {
-    round(x, y, w, h, 16); ctx.fillStyle = fill; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = stroke; ctx.stroke();
-  };
-  const button = (x, y, w, h, c1, c2, text) => {
-    const grad = ctx.createLinearGradient(x, y, x, y + h); grad.addColorStop(0, c1); grad.addColorStop(1, c2);
-    round(x, y, w, h, 13); ctx.fillStyle = grad; ctx.fill(); ctx.strokeStyle = "rgba(255,255,255,.22)"; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = "rgba(8,18,24,.82)"; ctx.font = "700 21px 'Microsoft YaHei', sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(text, x + w / 2, y + h / 2 + 1);
-  };
-  const icon = (cx, cy, r, color, glyph) => {
-    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fillStyle = color; ctx.fill(); ctx.strokeStyle = "rgba(255,255,255,.26)"; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = "#102029"; ctx.font = "700 25px sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(glyph, cx, cy + 1);
-  };
-  // Header plate and badge
-  panel(42, 38, 282, 120, "#162b35", "#3d6f78");
-  ctx.fillStyle = "#8de8d2"; ctx.font = "700 25px 'Microsoft YaHei',sans-serif"; ctx.textAlign = "left"; ctx.fillText("灵墟问道", 65, 83);
-  ctx.fillStyle = "#83a5ae"; ctx.font = "400 14px sans-serif"; ctx.fillText("UI COMMON SPRITES", 67, 112);
-  ctx.fillStyle = "#f3c780"; ctx.beginPath(); ctx.arc(270, 78, 13, 0, Math.PI * 2); ctx.fill();
-  panel(354, 42, 176, 74, "#2a283c", "#7666a9"); ctx.fillStyle = "#dcc9ff"; ctx.font = "700 19px 'Microsoft YaHei',sans-serif"; ctx.textAlign = "center"; ctx.fillText("任务完成", 442, 81);
-  // Buttons row
-  button(48, 192, 194, 62, "#4cd1c0", "#2e9c9d", "确 定");
-  button(258, 192, 194, 62, "#84c9ff", "#4d8fd3", "取 消");
-  button(468, 192, 194, 62, "#f7ce7d", "#d98d53", "开 始");
-  button(678, 192, 194, 62, "#d9a2ff", "#8c64cb", "详 情");
-  // Large panel with rows
-  panel(48, 292, 302, 170, "#182831", "#37545d");
-  ctx.fillStyle = "#d6eee8"; ctx.font = "700 18px 'Microsoft YaHei',sans-serif"; ctx.textAlign = "left"; ctx.fillText("冒险日志", 70, 330);
-  for (let i = 0; i < 3; i++) { ctx.fillStyle = i === 0 ? "#63d9c3" : "#6f8a96"; ctx.fillRect(70, 356 + i * 29, i === 0 ? 190 : 145 - i * 20, 7); }
-  ctx.fillStyle = "#5b7781"; ctx.font = "400 12px sans-serif"; ctx.fillText("探索新区域，收集灵石与装备", 70, 435);
-  // Decorative icons
-  icon(420, 334, 34, "#efb66a", "✦"); icon(516, 334, 34, "#7dbdff", "◆"); icon(612, 334, 34, "#d09aff", "★"); icon(708, 334, 34, "#68ddc5", "✚");
-  // Small tags
-  panel(382, 397, 168, 65, "#252541", "#5c5c8d"); ctx.fillStyle = "#c5b6ff"; ctx.font = "600 16px sans-serif"; ctx.textAlign = "center"; ctx.fillText("灵石 × 120", 466, 430);
-  panel(575, 397, 168, 65, "#252f42", "#5478a0"); ctx.fillStyle = "#9ec8ff"; ctx.fillText("经验 + 360", 659, 430);
-  // Bottom wide cards
-  button(48, 510, 250, 68, "#ef8f9e", "#b95576", "返 回");
-  panel(330, 510, 250, 68, "#1b3439", "#39726e"); ctx.fillStyle = "#80e3cf"; ctx.font = "700 18px sans-serif"; ctx.textAlign = "center"; ctx.fillText("已保存", 455, 545);
-  panel(612, 510, 260, 68, "#30253e", "#72518d"); ctx.fillStyle = "#d6b7ff"; ctx.fillText("继续探索", 742, 545);
-  return ctx.getImageData(0, 0, canvas.width, canvas.height);
-}
-
-function makeDemoSlices() {
-  const defs = [
-    [42, 38, 282, 120, "header_plate"], [354, 42, 176, 74, "badge_complete"],
-    [48, 192, 194, 62, "button_confirm"], [258, 192, 194, 62, "button_cancel"],
-    [468, 192, 194, 62, "button_start"], [678, 192, 194, 62, "button_detail"],
-    [48, 292, 302, 170, "panel_log"], [386, 300, 68, 68, "icon_gem"],
-    [482, 300, 68, 68, "icon_crystal"], [578, 300, 68, 68, "icon_star"],
-    [674, 300, 68, 68, "icon_heal"], [48, 510, 250, 68, "button_back"],
-    [330, 510, 250, 68, "status_saved"], [612, 510, 260, 68, "button_continue"],
-  ];
-  return defs.map(([x, y, width, height, name], i) => ({ id: `demo-${i + 1}`, name, x, y, width, height, keepPadding: true }));
 }
 
 function canvasTokens() {
@@ -439,7 +374,9 @@ function renderCanvas() {
   const tokens = canvasTokens();
   vctx.setTransform(dpr, 0, 0, dpr, 0, 0); vctx.clearRect(0, 0, width, height); vctx.fillStyle = tokens.canvasBg; vctx.fillRect(0, 0, width, height);
   const data = currentPreviewData();
-  if (!data) return;
+  const emptyState = $("#stageEmpty");
+  if (!data) { if (emptyState) emptyState.hidden = false; return; }
+  if (emptyState) emptyState.hidden = true;
   const imageRect = { x: state.transform.x, y: state.transform.y, width: data.width * state.transform.scale, height: data.height * state.transform.scale };
   drawChecker(vctx, imageRect.x, imageRect.y, imageRect.width, imageRect.height, Math.max(8, 16 * Math.min(1, state.transform.scale)), tokens);
   const imgCanvas = canvasForData(data);
@@ -513,8 +450,19 @@ function renderInspector() {
 function getPrimarySelected() { const id = [...state.selectedIds][0]; return state.slices.find((s) => s.id === id) || null; }
 
 function updateImageLabels() {
-  const data = getWorkingImageData(); if (!data) return;
-  const dims = `${data.width} × ${data.height}`; $("#assetName").textContent = state.imageName; $("#assetSize").textContent = `${dims} px`; $("#assetFormat").textContent = state.fileFormat || "PNG"; $("#assetStatus").textContent = state.hasDemo ? "已载入示例" : "本地已载入"; $("#canvasFileName").textContent = state.imageName; $("#canvasDimensions").textContent = dims; $("#gridImageSize").textContent = dims; if (state.assetDataRef !== data) { renderThumb(assetCtx, assetThumb, data); state.assetDataRef = data; }
+  const data = getWorkingImageData();
+  if (!data) {
+    $("#assetName").textContent = "未选择图片";
+    $("#assetSize").textContent = "—";
+    $("#assetFormat").textContent = "PNG";
+    $("#assetStatus").textContent = "等待导入";
+    $("#canvasFileName").textContent = "未选择图片";
+    $("#canvasDimensions").textContent = "—";
+    $("#gridImageSize").textContent = "—";
+    if (state.assetDataRef !== null) { renderThumb(assetCtx, assetThumb, null); state.assetDataRef = null; }
+    return;
+  }
+  const dims = `${data.width} × ${data.height}`; $("#assetName").textContent = state.imageName; $("#assetSize").textContent = `${dims} px`; $("#assetFormat").textContent = state.fileFormat || "PNG"; $("#assetStatus").textContent = "本地已载入"; $("#canvasFileName").textContent = state.imageName; $("#canvasDimensions").textContent = dims; $("#gridImageSize").textContent = dims; if (state.assetDataRef !== data) { renderThumb(assetCtx, assetThumb, data); state.assetDataRef = data; }
 }
 
 function renderAll() { updateImageLabels(); renderSliceList(); renderInspector(); renderDetectList(); renderCanvas(); updateZoomLabel(); updatePreviewButtons(); updateHistoryButtons(); const applyBtn = $("#applyCleanBtn"); if (applyBtn) applyBtn.disabled = !state.pendingCleaned; }
@@ -631,7 +579,7 @@ async function loadFile(file) {
       const url = URL.createObjectURL(file);
       drawable = await new Promise((resolve, reject) => { const image = new Image(); image.onload = () => { URL.revokeObjectURL(url); resolve(image); }; image.onerror = (err) => { URL.revokeObjectURL(url); reject(err); }; image.src = url; });
     }
-    const canvas = document.createElement("canvas"); canvas.width = drawable.width || drawable.naturalWidth; canvas.height = drawable.height || drawable.naturalHeight; const ctx = canvas.getContext("2d", { willReadFrequently: true }); ctx.drawImage(drawable, 0, 0); setImageData(ctx.getImageData(0, 0, canvas.width, canvas.height), file.name.replace(/\.[^.]+$/, ""), file.name, false); if (typeof drawable.close === "function") drawable.close(); toast(`已载入 ${file.name} · ${canvas.width} × ${canvas.height}`, "success");
+    const canvas = document.createElement("canvas"); canvas.width = drawable.width || drawable.naturalWidth; canvas.height = drawable.height || drawable.naturalHeight; const ctx = canvas.getContext("2d", { willReadFrequently: true }); ctx.drawImage(drawable, 0, 0); setImageData(ctx.getImageData(0, 0, canvas.width, canvas.height), file.name.replace(/\.[^.]+$/, ""), file.name); if (typeof drawable.close === "function") drawable.close(); toast(`已载入 ${file.name} · ${canvas.width} × ${canvas.height}`, "success");
   } catch (err) { console.error(err); toast("图片读取失败，请换一张 PNG 重试", "error"); }
 }
 
@@ -723,8 +671,8 @@ async function exportSlices(selectedOnly = false) {
     }));
     const result = await exportSlicesAsPng(data, namedSlices, { trim, alphaThreshold: 1 });
     downloadPngFiles(result.files, { delay: 110 });
-    if (useNames) downloadCocosMeta(namedSlices, data, { trim });
-    toast(`已准备 ${result.files.length} 个 PNG${useNames ? " 与 Cocos 元数据" : ""}，浏览器将开始下载`, "success");
+    if (useNames) downloadMetadata(namedSlices, data, { trim });
+    toast(`已准备 ${result.files.length} 个 PNG${useNames ? " 与坐标清单" : ""}，浏览器将开始下载`, "success");
   } catch (err) {
     console.error(err);
     toast(`导出失败：${err.message}`, "error");
@@ -734,9 +682,9 @@ async function exportSlices(selectedOnly = false) {
   }
 }
 
-function buildCocosMetaBlob(slices, data, options = {}) {
+function buildMetadataBlob(slices, data, options = {}) {
   const payload = {
-    format: "SpriteLab-Cocos",
+    format: "SpriteLab-Atlas",
     version: 1,
     image: state.fileName,
     size: { width: data.width, height: data.height },
@@ -752,13 +700,13 @@ function buildCocosMetaBlob(slices, data, options = {}) {
     })),
   };
   return {
-    name: `${state.imageName || "atlas"}.cocos.json`,
+    name: `${state.imageName || "atlas"}.atlas.json`,
     blob: new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" }),
   };
 }
 
-function downloadCocosMeta(slices, data, options = {}) {
-  const file = buildCocosMetaBlob(slices, data, options);
+function downloadMetadata(slices, data, options = {}) {
+  const file = buildMetadataBlob(slices, data, options);
   const href = URL.createObjectURL(file.blob);
   const a = document.createElement("a");
   a.href = href;
@@ -790,11 +738,11 @@ async function exportSlicesZip(selectedOnly = false) {
         : `${state.imageName}_${String(i + 1).padStart(3, "0")}`,
     }));
     const result = await exportSlicesAsPng(data, namedSlices, { trim, alphaThreshold: 1 });
-    const extraFiles = useNames ? [buildCocosMetaBlob(namedSlices, data, { trim })] : [];
+    const extraFiles = useNames ? [buildMetadataBlob(namedSlices, data, { trim })] : [];
     const zip = await createZipBlob(result.files, { extraFiles });
     const suffix = selectedOnly ? "-selected" : "";
     downloadZipBlob(zip, `${state.imageName || "sprites"}${suffix}.zip`);
-    toast(`已下载 ZIP：${result.files.length} 个 PNG${useNames ? " 与 Cocos 元数据" : ""}`, "success");
+    toast(`已下载 ZIP：${result.files.length} 个 PNG${useNames ? " 与坐标清单" : ""}`, "success");
   } catch (err) {
     console.error(err);
     toast(`ZIP 导出失败：${err.message}`, "error");
@@ -843,6 +791,6 @@ function bindEvents() {
   $("#exportAllBtn").addEventListener("click", () => exportSlices(false)); $("#exportSelectedBtn").addEventListener("click", () => exportSlices(true)); $("#exportZipBtn").addEventListener("click", () => exportSlicesZip(false)); $("#helpBtn").addEventListener("click", () => openModal("helpModal")); $("#settingsBtn").addEventListener("click", () => openModal("settingsModal")); $("#themeToggleBtn").addEventListener("click", () => applyTheme(state.theme === "light" ? "dark" : "light")); $("#themeSelect").addEventListener("change", (e) => applyTheme(e.target.value)); $$('[data-close-modal]').forEach((b) => b.addEventListener("click", () => closeModal(b.dataset.closeModal))); $$(".modal-backdrop").forEach((m) => m.addEventListener("click", (e) => { if (e.target === m) m.hidden = true; })); $("#rulerToggle").addEventListener("change", (e) => { state.rulerVisible = e.target.checked; renderCanvas(); }); $("#contrastToggle").addEventListener("change", (e) => { state.highContrast = e.target.checked; renderCanvas(); });
 }
 
-function init() { applyTheme(storedTheme(), false); setImageData(makeDemoImage(), "灵墟问道-ui通用精灵图", state.fileName, true); bindEvents(); requestAnimationFrame(() => { resizeViewport(); fitToWindow(); }); $("#bgColorSwatch").style.background = $("#bgColorInput").value; toast("示例图集已载入 · 拖入 PNG 开始工作", "success"); }
+function init() { applyTheme(storedTheme(), false); setImageData(null, "未选择图片", "atlas.png"); bindEvents(); requestAnimationFrame(() => { resizeViewport(); fitToWindow(); }); $("#bgColorSwatch").style.background = $("#bgColorInput").value; }
 
 init();

@@ -2,7 +2,7 @@
 
 # SpriteLab · UI 图集拆分器
 
-一款面向 Cocos Creator 的纯前端 UI 图集拆分工具。  
+一款纯前端 UI 图集拆分工具。
 在浏览器本地把一张 PNG 图集拆成可直接使用的独立 PNG，不上传素材，不依赖后端。
 
 [![GitHub](https://img.shields.io/badge/GitHub-shj1995%2Fui--atlas--slicer-181717?logo=github)](https://github.com/shj1995/ui-atlas-slicer)
@@ -31,8 +31,8 @@
 | Alpha 自动识别 | Alpha 阈值、最小面积/宽高、碎片合并、候选框删除/合并/调整、接受结果 |
 | 假透明清理 | 四角取样、颜色阈值、边缘 Flood Fill、羽化/边缘保护、原图/清理后/Alpha 蒙版预览 |
 | 网格切片 | 行列、单格尺寸、横纵间距、外边距、跳过空白、排序、每格透明裁剪 |
-| 导出 | 批量导出独立 PNG；可按名称编号，并生成自定义 Cocos 坐标清单 JSON |
-| ZIP 打包 | 一键把当前全部切片和可选的 Cocos 坐标清单打包为单个 ZIP，完全在浏览器本地完成 |
+| 导出 | 批量导出独立 PNG；可按名称编号，并生成可选的坐标清单 JSON |
+| ZIP 打包 | 一键把当前全部切片和可选的坐标清单打包为单个 ZIP，完全在浏览器本地完成 |
 | 主题 | 默认白色主题；支持深色主题并记住浏览器本地偏好，适配 2K 屏字体与控件尺寸 |
 
 ## 快速开始
@@ -62,13 +62,13 @@ npm run preview
 3. 素材很多时，可先用“自动识别”生成候选框，再删除、合并或调整错误结果。
 4. 如果棋盘格已经写进 PNG，进入“背景清理”，取样并预览清理结果。
 5. 对规则动画帧或规则图标使用“网格切片”。
-6. 导出 PNG 后直接导入 Cocos Creator，或继续交给 TexturePacker 打包。
+6. 导出 PNG 和坐标清单，交给后续设计或游戏资源流程继续使用。
 
 ## 导出说明
 
 - 名称支持 {n} 序号占位符；{nn}、{nnn} 可生成两位或三位补零序号。
-- “生成 Cocos 命名”会额外下载一个 *.cocos.json 坐标清单，便于工具链继续处理。
-- 该 JSON 是 SpriteLab 的自定义坐标清单，不是 Cocos 原生 .meta 或 .plist 文件；导出的独立 PNG 可直接导入 Cocos Creator。
+- “生成坐标清单”会额外下载一个 *.atlas.json 文件，便于后续工具链继续处理。
+- 该 JSON 是 SpriteLab 的自定义坐标清单，记录原图尺寸、切片坐标和裁剪状态。
 - “导出 ZIP”会将 PNG 文件（以及启用命名时的坐标清单）打包为一个 ZIP，适合归档或交付。
 
 ## 快捷键
@@ -129,6 +129,8 @@ ui-atlas-slicer/
 ├── styles.css                 # 主题、布局和响应式样式
 ├── app.js                     # 交互、Canvas 渲染和导出流程
 ├── wrangler.jsonc             # Cloudflare Workers Static Assets 配置
+├── public/
+│   └── spritelab-icon.png     # 应用图标与 favicon
 ├── src/
 │   ├── imageProcessing.js     # 无框架图像处理算法
 │   └── imageProcessing.README.md
@@ -152,7 +154,7 @@ npm run build
 
 - [ ] Web Worker 处理超大图集，降低主线程占用
 - [ ] 可保存/导入切片工程文件
-- [ ] 更多 Cocos Creator / TexturePacker 元数据格式适配
+- [ ] 更多通用元数据格式适配
 - [ ] 批量处理多个图集
 
 ## License

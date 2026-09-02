@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f4f7fb" />
+    <link rel="icon" type="image/png" href="/spritelab-icon.png" />
     <title>SpriteLab · UI 图集拆分器</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -12,7 +13,7 @@
       <header class="topbar">
         <div class="brand-lockup">
           <div class="brand-mark" aria-hidden="true">
-            <span></span><span></span><span></span><span></span>
+            <img src="/spritelab-icon.png" alt="" />
           </div>
           <div class="brand-copy">
             <div class="brand-name">SpriteLab</div>
@@ -61,16 +62,16 @@
             <div class="asset-card" id="assetDropZone">
               <div class="asset-preview checkerboard" id="assetPreview"><canvas id="assetThumb" width="224" height="126"></canvas></div>
               <div class="asset-meta">
-                <div class="asset-name" id="assetName">灵墟问道-ui通用精灵图</div>
-                <div class="asset-details"><span id="assetSize">1024 × 640 px</span><span class="dot-sep">·</span><span id="assetFormat">PNG</span></div>
+                <div class="asset-name" id="assetName">未选择图片</div>
+                <div class="asset-details"><span id="assetSize">—</span><span class="dot-sep">·</span><span id="assetFormat">PNG</span></div>
               </div>
-              <div class="asset-status"><span class="status-dot"></span><span id="assetStatus">已载入示例</span></div>
+              <div class="asset-status"><span class="status-dot"></span><span id="assetStatus">等待导入</span></div>
             </div>
             <input id="fileInput" type="file" accept="image/png,image/webp,image/jpeg" hidden />
             <button class="drop-hint" id="dropHint"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M5 14.5v3A2.5 2.5 0 0 0 7.5 20h9a2.5 2.5 0 0 0 2.5-2.5v-3"/></svg><span>拖入 PNG 或点击替换</span></button>
 
             <div class="sidebar-rule"></div>
-            <div class="section-heading"><span>切片工具</span><span class="muted-count" id="sliceCount">12 个</span></div>
+            <div class="section-heading"><span>切片工具</span><span class="muted-count" id="sliceCount">0 个</span></div>
             <div class="tool-grid">
               <button class="tool-btn active" data-mode="select"><svg viewBox="0 0 24 24"><path d="m6 3 12.5 9.3-6.1 1.1 3.5 6.1-2.2 1.2-3.4-6.2-3.8 4.5Z"/></svg><span>选择</span><kbd>V</kbd></button>
               <button class="tool-btn" data-mode="draw"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="1.5"/><path d="M8 3v4M16 3v4M8 17v4M16 17v4"/></svg><span>矩形切片</span><kbd>R</kbd></button>
@@ -91,7 +92,7 @@
 
         <main class="canvas-area">
           <div class="canvas-toolbar">
-            <div class="canvas-breadcrumb"><span>画布</span><span class="slash">/</span><span class="active-breadcrumb" id="canvasFileName">灵墟问道-ui通用精灵图</span></div>
+            <div class="canvas-breadcrumb"><span>画布</span><span class="slash">/</span><span class="active-breadcrumb" id="canvasFileName">未选择图片</span></div>
             <div class="canvas-toolbar-actions">
               <div class="segmented" role="group" aria-label="预览模式">
                 <button class="seg-btn active" data-preview="image" title="原图">原图</button>
@@ -179,15 +180,15 @@
                 <div class="toggle-row"><div><b>裁剪每格透明边缘</b><small>导出更紧凑的 PNG</small></div><label class="switch"><input id="gridCropToggle" type="checkbox"/><span></span></label></div>
                 <button class="primary-btn wide" id="runGridBtn"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></svg>生成网格切片</button>
               </div>
-              <div class="grid-tip"><span class="tip-icon">i</span><span>当前图片 <b id="gridImageSize">1024 × 640</b>。留空单格尺寸将根据行列自动计算。</span></div>
+              <div class="grid-tip"><span class="tip-icon">i</span><span>当前图片 <b id="gridImageSize">—</b>。留空单格尺寸将根据行列自动计算。</span></div>
             </section>
           </div>
         </aside>
       </div>
 
       <footer class="export-bar">
-        <div class="export-summary"><span class="export-check"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span><div><b id="exportCount">12 个切片</b><small>准备就绪 · PNG / RGBA</small></div></div>
-        <div class="export-options"><label class="check-label"><input id="exportTrimToggle" type="checkbox"/><span class="fake-check"></span>导出时裁剪透明边缘</label><label class="check-label"><input id="exportMetaToggle" type="checkbox" checked/><span class="fake-check"></span>生成 Cocos 命名</label></div>
+        <div class="export-summary"><span class="export-check"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span><div><b id="exportCount">0 个切片</b><small>准备就绪 · PNG / RGBA</small></div></div>
+        <div class="export-options"><label class="check-label"><input id="exportTrimToggle" type="checkbox"/><span class="fake-check"></span>导出时裁剪透明边缘</label><label class="check-label"><input id="exportMetaToggle" type="checkbox" checked/><span class="fake-check"></span>生成坐标清单</label></div>
         <div class="export-actions"><button class="secondary-btn export-zip-btn" id="exportZipBtn"><svg viewBox="0 0 24 24"><path d="M4 7.5h16v12H4z"/><path d="M4 7.5 7 4h4l1.5 2h4l3 1.5M9 11h6M9 14h6M9 17h3"/></svg>导出 ZIP</button><button class="secondary-btn" id="exportSelectedBtn" disabled>导出选中</button><button class="primary-btn export-btn" id="exportAllBtn"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 19h14"/></svg>导出全部 PNG <span class="btn-caret">⌄</span></button></div>
       </footer>
     </div>

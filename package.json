@@ -2,7 +2,7 @@
   "name": "ui-atlas-slicer",
   "private": true,
   "version": "0.1.0",
-  "description": "纯前端、浏览器本地运行的 Cocos Creator UI 图集拆分器",
+  "description": "纯前端、浏览器本地运行的 UI 图集拆分工具",
   "license": "MIT",
   "author": "shj1995",
   "repository": {

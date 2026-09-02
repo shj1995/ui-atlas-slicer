@@ -841,8 +841,8 @@ export function downloadPngFiles(files, options = {}) {
  *
  * `files` is normally the `result.files` array returned by
  * {@link exportSlicesAsPng}: `{ name, blob }`.  `extraFiles` can be an object
- * or an array of `{ name, blob }` entries (for example a Cocos coordinate
- * manifest) and is stored alongside the PNGs.  The function is async because
+ * or an array of `{ name, blob }` entries (for example a coordinate manifest)
+ * and is stored alongside the PNGs.  The function is async because
  * browser Blobs expose their bytes through `arrayBuffer()`.
  *
  * Empty input, malformed entries, zero-byte files, and ZIP encoder failures

@@ -110,9 +110,8 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .app-shell { height: 100vh; min-height: 680px; display: grid; grid-template-rows: 64px minmax(0,1fr) 72px; background: radial-gradient(ellipse at 45% -30%, rgba(46, 90, 103, .16), transparent 48%), var(--bg-app); }
 .topbar { display:flex; align-items:center; gap:20px; padding:0 22px; background:rgba(15,20,27,.92); border-bottom:1px solid var(--border-soft); }
 .brand-lockup { display:flex; align-items:center; gap:10px; min-width:185px; }
-.brand-mark { width:28px; height:28px; border-radius:8px; display:grid; grid-template-columns:1fr 1fr; gap:3px; padding:5px; background:linear-gradient(145deg,#67e7cd,#2b948b); box-shadow:0 0 0 1px rgba(131,255,229,.26), 0 5px 20px rgba(44,184,158,.25); transform:rotate(-3deg); }
-.brand-mark span { border-radius:2px; background:#081519; opacity:.9; }
-.brand-mark span:nth-child(1){opacity:.55}.brand-mark span:nth-child(4){opacity:.72}
+.brand-mark { width:28px; height:28px; border-radius:8px; display:grid; place-items:center; padding:0; overflow:visible; background:transparent; box-shadow:none; transform:none; }
+.brand-mark img { display:block; width:100%; height:100%; object-fit:contain; }
 .brand-name { font-weight:800; letter-spacing:.1px; font-size:14px; line-height:16px; }
 .brand-subtitle { font-size:10px; color:var(--text-3); letter-spacing:.6px; margin-top:2px; }
 .topbar-divider { width:1px; height:25px; background:var(--border); }
@@ -241,7 +240,7 @@ button, input, select { font-size: 1rem; }
   box-shadow: 0 1px 0 rgba(24, 39, 53, .03);
 }
 .brand-lockup { min-width: 220px; gap: 12px; }
-.brand-mark { width: 34px; height: 34px; border-radius: 9px; }
+.brand-mark { width: 38px; height: 38px; border-radius: 10px; }
 .brand-name { font-size: 17px; line-height: 20px; }
 .brand-subtitle { font-size: 12px; letter-spacing: .55px; }
 .topbar-divider { height: 30px; background: var(--border); }
